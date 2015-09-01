@@ -37,6 +37,7 @@ public class EvaluateTreeVisitor implements TreeVisitor {
 	@Override
 	public void visit(UnaryMinusTreeNode node) {
 		// TODO fill me in
+        node.getChild().accept(this);
 
         operand1 = operands.pop();
         operands.push(-1 * operand1);
@@ -59,7 +60,7 @@ public class EvaluateTreeVisitor implements TreeVisitor {
 
         node.getLeftChild().accept(this);
         node.getRightChild().accept(this);
-        
+
         operand1 = operands.pop();
         operand2 = operands.pop();
         operands.push(operand1 * operand2);
@@ -68,6 +69,10 @@ public class EvaluateTreeVisitor implements TreeVisitor {
 	@Override
 	public void visit(SubtractionTreeNode node) {
 		// TODO fill me in
+
+        node.getLeftChild().accept(this);
+        node.getRightChild().accept(this);
+
         operand1 = operands.pop();
         operand2 = operands.pop();
         operands.push(operand2 - operand1);
@@ -76,6 +81,10 @@ public class EvaluateTreeVisitor implements TreeVisitor {
 	@Override
 	public void visit(DivisionTreeNode node) {
 		// TODO fill me in
+
+        node.getLeftChild().accept(this);
+        node.getRightChild().accept(this);
+
         operand1 = operands.pop();
         operand2 = operands.pop();
         operands.push(operand2 / operand1);
