@@ -10,23 +10,36 @@ import cs4321.project1.list.*;
 
 public class PrintListVisitor implements ListVisitor {
 
+    private String result; // running string representation
+
 	public PrintListVisitor() {
 		// TODO fill me in
+        //result = "";
 	}
 
 	public String getResult() {
 		// TODO fill me in
-		return null;
+		//return result;
 	}
 
+    /**
+     * Visit method for leaf node; just concatenates the numeric value to the
+     * running string
+     *
+     * @param node
+     *            the node to be visited
+     */
 	@Override
 	public void visit(NumberListNode node) {
 		// TODO fill me in
+        //result += node.getData();
+
 	}
 
 	@Override
 	public void visit(AdditionListNode node) {
 		// TODO fill me in
+
 	}
 
 	@Override
@@ -49,7 +62,6 @@ public class PrintListVisitor implements ListVisitor {
 	@Override
 	public void visit(UnaryMinusListNode node) {
 		// TODO fill me in
-
 	}
 
 }
