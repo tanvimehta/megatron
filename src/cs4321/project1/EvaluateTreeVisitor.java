@@ -1,11 +1,6 @@
 package cs4321.project1;
 
-import cs4321.project1.tree.DivisionTreeNode;
-import cs4321.project1.tree.LeafTreeNode;
-import cs4321.project1.tree.SubtractionTreeNode;
-import cs4321.project1.tree.AdditionTreeNode;
-import cs4321.project1.tree.MultiplicationTreeNode;
-import cs4321.project1.tree.UnaryMinusTreeNode;
+import cs4321.project1.tree.*;
 
 import java.util.Stack;
 
@@ -42,6 +37,7 @@ public class EvaluateTreeVisitor implements TreeVisitor {
 	@Override
 	public void visit(UnaryMinusTreeNode node) {
 		// TODO fill me in
+
         operand1 = operands.pop();
         operands.push(-1 * operand1);
 	}
@@ -49,6 +45,9 @@ public class EvaluateTreeVisitor implements TreeVisitor {
 	@Override
 	public void visit(AdditionTreeNode node) {
 		// TODO fill me in
+        node.getLeftChild().accept(this);
+        node.getRightChild().accept(this);
+
         operand1 = operands.pop();
         operand2 = operands.pop();
         operands.push(operand1 + operand2);
@@ -57,6 +56,10 @@ public class EvaluateTreeVisitor implements TreeVisitor {
 	@Override
 	public void visit(MultiplicationTreeNode node) {
 		// TODO fill me in
+
+        node.getLeftChild().accept(this);
+        node.getRightChild().accept(this);
+        
         operand1 = operands.pop();
         operand2 = operands.pop();
         operands.push(operand1 * operand2);
