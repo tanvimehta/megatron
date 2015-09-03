@@ -10,43 +10,93 @@ import cs4321.project1.tree.*;
  */
 public class BuildPrefixExpressionTreeVisitor implements TreeVisitor {
 
-	public BuildPrefixExpressionTreeVisitor() {
-		// TODO fill me in
+    private ListNode tempResult;
+    private ListNode result;
+
+    public BuildPrefixExpressionTreeVisitor() {
+		tempResult = null;
+        result = null;
 	}
 
 	public ListNode getResult() {
 		// TODO fill me in
-		return null;
+		return result;
 	}
 
 	@Override
 	public void visit(LeafTreeNode node) {
 		// TODO fill me in
+        if (tempResult != null) {
+            tempResult.setNext(new NumberListNode(node.getData()));
+        } else {
+            tempResult = new NumberListNode(node.getData());
+            result = tempResult;
+        }
+        tempResult = tempResult.getNext();
 	}
 
 	@Override
 	public void visit(UnaryMinusTreeNode node) {
 		// TODO fill me in
+        if (tempResult !=null) {
+            tempResult.setNext(new UnaryMinusListNode());
+        } else {
+            tempResult = new UnaryMinusListNode();
+            result = tempResult;
+        }
+        node.getChild().accept(this);
 	}
 
 	@Override
 	public void visit(AdditionTreeNode node) {
 		// TODO fill me in
+        if (tempResult != null) {
+            tempResult.setNext(new AdditionListNode());
+        } else {
+            tempResult = new AdditionListNode();
+            result = tempResult;
+        }
+        node.getLeftChild().accept(this);
+        node.getRightChild().accept(this);
 	}
 
 	@Override
 	public void visit(MultiplicationTreeNode node) {
 		// TODO fill me in
+        if (tempResult != null) {
+            tempResult.setNext(new MultiplicationListNode());
+        } else {
+            tempResult = new MultiplicationListNode();
+            result = tempResult;
+        }
+        node.getLeftChild().accept(this);
+        node.getRightChild().accept(this);
 	}
 
 	@Override
 	public void visit(SubtractionTreeNode node) {
 		// TODO fill me in
+        if (tempResult != null) {
+            tempResult.setNext(new SubtractionListNode());
+        } else {
+            tempResult = new SubtractionListNode();
+            result = tempResult;
+        }
+        node.getLeftChild().accept(this);
+        node.getRightChild().accept(this);
 	}
 
 	@Override
 	public void visit(DivisionTreeNode node) {
 		// TODO fill me in
+        if (tempResult != null) {
+            tempResult.setNext(new DivisionListNode());
+        } else {
+            tempResult = new DivisionListNode();
+            result = tempResult;
+        }
+        node.getLeftChild().accept(this);
+        node.getRightChild().accept(this);
 	}
 
 }

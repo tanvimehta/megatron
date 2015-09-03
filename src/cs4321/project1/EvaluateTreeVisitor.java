@@ -5,7 +5,7 @@ import cs4321.project1.tree.*;
 import java.util.Stack;
 
 /**
- * Provide a comment about what your class does and the overall logic
+ * Traverse expression tree and evaluate it to a single number
  * 
  * @author Your names and netids go here
  */

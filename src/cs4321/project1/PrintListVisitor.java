@@ -3,7 +3,7 @@ package cs4321.project1;
 import cs4321.project1.list.*;
 
 /**
- * Provide a comment about what your class does and the overall logic
+ * Visitor to pretty-print the expression in either prefix or postfix form
  * 
  * @author Your names and netids go here
  */
