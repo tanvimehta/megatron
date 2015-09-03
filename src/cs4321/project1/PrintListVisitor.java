@@ -55,7 +55,7 @@ public class PrintListVisitor implements ListVisitor {
 	/**
 	 * Visit method for the addition list node; concatenates a + sign
 	 * to the running string and recursively calls the next node
-	 * using visitor patter
+	 * using visitor pattern
 	 * 
 	 * @param node
 	 * 				the node to be visited
@@ -70,7 +70,7 @@ public class PrintListVisitor implements ListVisitor {
 	/**
 	 * Visit method for the subraction list node; concatenates a - sign
 	 * to the running string and recursively calls the next node
-	 * using visitor patter
+	 * using visitor pattern
 	 * 
 	 * @param node
 	 * 				the node to be visited
@@ -85,7 +85,7 @@ public class PrintListVisitor implements ListVisitor {
 	/**
 	 * Visit method for the multiplication list node; concatenates a * sign
 	 * to the running string and recursively calls the next node
-	 * using visitor patter
+	 * using visitor pattern
 	 * 
 	 * @param node
 	 * 				the node to be visited
@@ -100,7 +100,7 @@ public class PrintListVisitor implements ListVisitor {
 	/**
 	 * Visit method for the division list node; concatenates a + sign
 	 * to the running string and recursively calls the next node
-	 * using visitor patter
+	 * using visitor pattern
 	 * 
 	 * @param node
 	 * 				the node to be visited

@@ -18,34 +18,37 @@ public class EvaluateTreeVisitor implements TreeVisitor {
     private double operand2;
 
 	public EvaluateTreeVisitor() {
-		// TODO fill me in
         result = 0;
 	}
 
 	public double getResult() {
-		// TODO fill me in
         result = operands.pop();
 		return result; // so that skeleton code compiles
 	}
 
 	@Override
 	public void visit(LeafTreeNode node) {
-		// TODO fill me in
         operands.push(node.getData());
 	}
 
+    /**
+     * Evaluates the unary tree node, adds the result to the stack and recursively calls the child node.
+     * @param node unary minus node
+     */
 	@Override
 	public void visit(UnaryMinusTreeNode node) {
-		// TODO fill me in
         node.getChild().accept(this);
 
         operand1 = operands.pop();
         operands.push(-1 * operand1);
 	}
 
+    /**
+     * Evaluates the addition tree node, adds the result to the stack and recursively calls the child nodes.
+     * @param node addition tree node
+     */
 	@Override
 	public void visit(AdditionTreeNode node) {
-		// TODO fill me in
         node.getLeftChild().accept(this);
         node.getRightChild().accept(this);
 
@@ -54,10 +57,12 @@ public class EvaluateTreeVisitor implements TreeVisitor {
         operands.push(operand1 + operand2);
 	}
 
+    /**
+     * Evaluates the multiplication tree node, adds the result to the stack and recursively calls the child nodes.
+     * @param node multiplication tree node
+     */
 	@Override
 	public void visit(MultiplicationTreeNode node) {
-		// TODO fill me in
-
         node.getLeftChild().accept(this);
         node.getRightChild().accept(this);
 
@@ -66,10 +71,12 @@ public class EvaluateTreeVisitor implements TreeVisitor {
         operands.push(operand1 * operand2);
 	}
 
+    /**
+     * Evaluates the subtraction tree node, adds the result to the stack and recursively calls the child nodes.
+     * @param node subtraction tree node
+     */
 	@Override
 	public void visit(SubtractionTreeNode node) {
-		// TODO fill me in
-
         node.getLeftChild().accept(this);
         node.getRightChild().accept(this);
 
@@ -78,10 +85,12 @@ public class EvaluateTreeVisitor implements TreeVisitor {
         operands.push(operand2 - operand1);
 	}
 
+    /**
+     * Evaluates the division tree node, adds the result to the stack and recursively calls the child nodes.
+     * @param node division tree node
+     */
 	@Override
 	public void visit(DivisionTreeNode node) {
-		// TODO fill me in
-
         node.getLeftChild().accept(this);
         node.getRightChild().accept(this);
 
