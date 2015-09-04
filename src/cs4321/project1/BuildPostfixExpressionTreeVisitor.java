@@ -53,7 +53,8 @@ public class BuildPostfixExpressionTreeVisitor implements TreeVisitor {
         node.getRightChild().accept(this);
         tempResult = tempResult.getNext();
         tempResult.setNext(new AdditionListNode());
-	}
+        tempResult = tempResult.getNext();
+    }
 
 	@Override
 	public void visit(MultiplicationTreeNode node) {
@@ -62,6 +63,7 @@ public class BuildPostfixExpressionTreeVisitor implements TreeVisitor {
         node.getRightChild().accept(this);
         tempResult = tempResult.getNext();
         tempResult.setNext(new MultiplicationListNode());
+        tempResult = tempResult.getNext();
 	}
 
 	@Override
@@ -71,8 +73,8 @@ public class BuildPostfixExpressionTreeVisitor implements TreeVisitor {
         node.getRightChild().accept(this);
         tempResult = tempResult.getNext();
         tempResult.setNext(new SubtractionListNode());
-
-	}
+        tempResult = tempResult.getNext();
+    }
 
 	@Override
 	public void visit(DivisionTreeNode node) {
@@ -81,6 +83,7 @@ public class BuildPostfixExpressionTreeVisitor implements TreeVisitor {
         node.getRightChild().accept(this);
         tempResult = tempResult.getNext();
         tempResult.setNext(new DivisionListNode());
-	}
+        tempResult = tempResult.getNext();
+    }
 
 }

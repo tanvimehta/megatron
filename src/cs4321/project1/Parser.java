@@ -59,7 +59,7 @@ public class Parser {
         } else {
             currentToken++;
             result = expression();
-            currentToken+=2;
+            currentToken += 2;
             return result;
         }
 	}
@@ -71,19 +71,22 @@ public class Parser {
 	 */
 	private TreeNode term() {
 		// TODO fill me in
+        TreeNode result1;
         String operator = "";
         result = factor();
+        result1 = result;
         currentToken++;
 
-        while (currentToken < tokens.length && tokens[currentToken] != null) {
+        while (currentToken < tokens.length && tokens[currentToken] != null &&
+                (tokens[currentToken].equalsIgnoreCase("*") || tokens[currentToken].equalsIgnoreCase("/"))) {
             operator = tokens[currentToken];
             currentToken++;
             result2 = factor();
 
             if (operator.equalsIgnoreCase("*")) {
-                result = new MultiplicationTreeNode(result, result2);
+                result = new MultiplicationTreeNode(result1, result2);
             } else if (operator.equalsIgnoreCase("/")) {
-                result = new DivisionTreeNode(result, result2);
+                result = new DivisionTreeNode(result1, result2);
             }
 
             currentToken++;
@@ -98,20 +101,18 @@ public class Parser {
 	 * @return the (root node of) the resulting subtree
 	 */
 	private TreeNode expression() {
-
 		// TODO fill me in
         String operator = "";
         result = term();
-        currentToken++;
+        TreeNode result1 = result;
         while (currentToken < tokens.length && tokens[currentToken] != null) {
             operator = tokens[currentToken];
             currentToken ++;
             result2 = term();
-
             if (operator.equalsIgnoreCase("+")) {
-                result = new AdditionTreeNode(result, result2);
+                result = new AdditionTreeNode(result1, result2);
             } else if(operator.equalsIgnoreCase("-")) {
-                result = new SubtractionTreeNode(result, result2);
+                result = new SubtractionTreeNode(result1, result2);
             }
             currentToken++;
         }

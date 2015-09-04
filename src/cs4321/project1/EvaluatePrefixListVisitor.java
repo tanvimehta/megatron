@@ -114,7 +114,7 @@ public class EvaluatePrefixListVisitor implements ListVisitor {
                 operands.push(operand2 - operand1);
                 break;
 
-            case '*': operands.push(operands.pop() + operands.pop());
+            case '*': operands.push(operands.pop() * operands.pop());
                 break;
 
             case '/': operand1 = operands.pop();

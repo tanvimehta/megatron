@@ -24,9 +24,13 @@ public class EvaluateTreeVisitorTest {
 		TreeNode n2 = new LeafTreeNode(2.0);
 		TreeNode n3 = new AdditionTreeNode(n1, n2);
 		TreeNode n4 = new AdditionTreeNode(n2, n1);
+
+        // 1 + 2
         EvaluateTreeVisitor v1 = new EvaluateTreeVisitor();
 		n3.accept(v1);
 		assertEquals(3.0, v1.getResult(), DELTA);
+
+        // 2 + 1
         EvaluateTreeVisitor v2 = new EvaluateTreeVisitor();
 		n4.accept(v2);
 		assertEquals(3.0, v2.getResult(), DELTA);

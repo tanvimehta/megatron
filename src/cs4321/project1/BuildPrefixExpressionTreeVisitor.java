@@ -40,10 +40,12 @@ public class BuildPrefixExpressionTreeVisitor implements TreeVisitor {
 		// TODO fill me in
         if (tempResult !=null) {
             tempResult.setNext(new UnaryMinusListNode());
+            tempResult = tempResult.getNext();
         } else {
             tempResult = new UnaryMinusListNode();
             result = tempResult;
         }
+
         node.getChild().accept(this);
 	}
 
@@ -52,10 +54,12 @@ public class BuildPrefixExpressionTreeVisitor implements TreeVisitor {
 		// TODO fill me in
         if (tempResult != null) {
             tempResult.setNext(new AdditionListNode());
+            tempResult = tempResult.getNext();
         } else {
             tempResult = new AdditionListNode();
             result = tempResult;
         }
+
         node.getLeftChild().accept(this);
         node.getRightChild().accept(this);
 	}
@@ -65,10 +69,12 @@ public class BuildPrefixExpressionTreeVisitor implements TreeVisitor {
 		// TODO fill me in
         if (tempResult != null) {
             tempResult.setNext(new MultiplicationListNode());
+            tempResult = tempResult.getNext();
         } else {
             tempResult = new MultiplicationListNode();
             result = tempResult;
         }
+
         node.getLeftChild().accept(this);
         node.getRightChild().accept(this);
 	}
@@ -78,10 +84,12 @@ public class BuildPrefixExpressionTreeVisitor implements TreeVisitor {
 		// TODO fill me in
         if (tempResult != null) {
             tempResult.setNext(new SubtractionListNode());
+            tempResult = tempResult.getNext();
         } else {
             tempResult = new SubtractionListNode();
             result = tempResult;
         }
+
         node.getLeftChild().accept(this);
         node.getRightChild().accept(this);
 	}
@@ -91,10 +99,12 @@ public class BuildPrefixExpressionTreeVisitor implements TreeVisitor {
 		// TODO fill me in
         if (tempResult != null) {
             tempResult.setNext(new DivisionListNode());
+            tempResult = tempResult.getNext();
         } else {
             tempResult = new DivisionListNode();
             result = tempResult;
         }
+
         node.getLeftChild().accept(this);
         node.getRightChild().accept(this);
 	}
