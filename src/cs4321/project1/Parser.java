@@ -18,6 +18,8 @@ public class Parser {
 
 	private String[] tokens;
 	private int currentToken; // pointer to next input token to be processed
+    private TreeNode result = null;
+    private TreeNode result2 = null;
 
 	/**
 	 * @precondition input represents a valid expression with all tokens
@@ -46,9 +48,20 @@ public class Parser {
 	 * @return the (root node of) the resulting subtree
 	 */
 	private TreeNode factor() {
-
 		// TODO fill me in
-		return null;
+        String operand = tokens[currentToken];
+        if (isNumber(operand)) {
+            return new LeafTreeNode(Double.parseDouble(operand));
+        } else if (operand.equalsIgnoreCase("-")) {
+            currentToken++;
+            result = factor();
+            return new UnaryMinusTreeNode(result);
+        } else {
+            currentToken++;
+            result = expression();
+            currentToken+=2;
+            return result;
+        }
 	}
 
 	/**
@@ -57,9 +70,25 @@ public class Parser {
 	 * @return the (root node of) the resulting subtree
 	 */
 	private TreeNode term() {
-
 		// TODO fill me in
-		return null;
+        String operator = "";
+        result = factor();
+        currentToken++;
+
+        while (currentToken < tokens.length && tokens[currentToken] != null) {
+            operator = tokens[currentToken];
+            currentToken++;
+            result2 = factor();
+
+            if (operator.equalsIgnoreCase("*")) {
+                result = new MultiplicationTreeNode(result, result2);
+            } else if (operator.equalsIgnoreCase("/")) {
+                result = new DivisionTreeNode(result, result2);
+            }
+
+            currentToken++;
+        }
+		return result;
 
 	}
 
@@ -71,7 +100,31 @@ public class Parser {
 	private TreeNode expression() {
 
 		// TODO fill me in
-		return null;
+        String operator = "";
+        result = term();
+        currentToken++;
+        while (currentToken < tokens.length && tokens[currentToken] != null) {
+            operator = tokens[currentToken];
+            currentToken ++;
+            result2 = term();
+
+            if (operator.equalsIgnoreCase("+")) {
+                result = new AdditionTreeNode(result, result2);
+            } else if(operator.equalsIgnoreCase("-")) {
+                result = new SubtractionTreeNode(result, result2);
+            }
+            currentToken++;
+        }
+		return result;
 
 	}
+
+    boolean isNumber(String operand) {
+        try {
+            Double.parseDouble(operand);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
