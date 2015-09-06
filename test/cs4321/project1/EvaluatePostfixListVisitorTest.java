@@ -49,6 +49,7 @@ public class EvaluatePostfixListVisitorTest {
 		n2.setNext(n3);
 		n3.setNext(n4);
 		n4.setNext(n5); //expression is 1 2 + 3 + 
+		
 		EvaluatePostfixListVisitor v1 = new EvaluatePostfixListVisitor();
 		n1.accept(v1);
 		assertEquals(6.0, v1.getResult(), DELTA);
@@ -69,6 +70,7 @@ public class EvaluatePostfixListVisitorTest {
 		n4.setNext(n5);
 		n5.setNext(n6);
 		n6.setNext(n7);
+		
 		EvaluatePostfixListVisitor v1 = new EvaluatePostfixListVisitor();
 		n1.accept(v1);
 		assertEquals(9.0, v1.getResult(), DELTA);
@@ -122,8 +124,8 @@ public class EvaluatePostfixListVisitorTest {
 		n7.setNext(n8);
 		n8.setNext(n9);
 		n9.setNext(n10);
-		
 		n10.setNext(n11); //Expression is 1 2 + 3 * 6 + 2 3 + /
+		
 		EvaluatePostfixListVisitor v1 = new EvaluatePostfixListVisitor();
 		n1.accept(v1);
 		assertEquals(3.0, v1.getResult(), DELTA);
