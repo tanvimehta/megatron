@@ -42,4 +42,66 @@ public class ParserTest {
 
 	}
 
+    @Test
+    public void testAdditionSimple() {
+        Parser p1 = new Parser("( - 1.0 + 2.0 )");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("((-1.0)+2.0)", v1.getResult());
+    }
+
+    @Test
+    public void testSubtractionSimple() {
+        Parser p1 = new Parser("- 1.0 - - 2.0");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("((-1.0)-(-2.0))", v1.getResult());
+    }
+
+    @Test
+    public void testMultiplicationSimple() {
+        Parser p1 = new Parser("- 1.0 * - 2.0");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("((-1.0)*(-2.0))", v1.getResult());
+    }
+
+    @Test
+    public void testDivisionSimple() {
+        Parser p1 = new Parser("- 1.0 / - 2.0");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("((-1.0)/(-2.0))", v1.getResult());
+    }
+
+    @Test
+    public void testBodmasSimple() {
+        Parser p1 = new Parser("- 2.0 * ( 3.0 + 1.0 )");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("((-2.0)*(3.0+1.0))", v1.getResult());
+    }
+
+    @Test
+    public void testBodmasComplex() {
+        Parser p1 = new Parser("( 5 * 2.0 ) / 6.5");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("((5.0*2.0)/6.5)", v1.getResult());
+    }
+
+    @Test
+    public void testBodmasComplex2() {
+        Parser p1 = new Parser("( 5 + 2.0 ) - 6.5");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("((5.0+2.0)-6.5)", v1.getResult());
+    }
 }

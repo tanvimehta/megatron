@@ -50,6 +50,7 @@ public class Parser {
 	private TreeNode factor() {
 		// TODO fill me in
         String operand = tokens[currentToken];
+
         if (isNumber(operand)) {
             return new LeafTreeNode(Double.parseDouble(operand));
         } else if (operand.equalsIgnoreCase("-")) {
@@ -59,7 +60,7 @@ public class Parser {
         } else {
             currentToken++;
             result = expression();
-            currentToken += 2;
+            currentToken++;
             return result;
         }
 	}
@@ -85,11 +86,17 @@ public class Parser {
 
             if (operator.equalsIgnoreCase("*")) {
                 result = new MultiplicationTreeNode(result1, result2);
+                result1 = result;
             } else if (operator.equalsIgnoreCase("/")) {
                 result = new DivisionTreeNode(result1, result2);
+                result1 = result;
             }
 
             currentToken++;
+
+            if (currentToken < tokens.length && tokens[currentToken] != null && tokens[currentToken].equalsIgnoreCase(")")) {
+                currentToken++;
+            }
         }
 		return result;
 
@@ -105,15 +112,20 @@ public class Parser {
         String operator = "";
         result = term();
         TreeNode result1 = result;
-        while (currentToken < tokens.length && tokens[currentToken] != null) {
+        while (currentToken < tokens.length && tokens[currentToken] != null &&
+                (tokens[currentToken].equalsIgnoreCase("+") || tokens[currentToken].equalsIgnoreCase("-"))) {
             operator = tokens[currentToken];
-            currentToken ++;
+            currentToken++;
             result2 = term();
+
             if (operator.equalsIgnoreCase("+")) {
                 result = new AdditionTreeNode(result1, result2);
+                result1 = result;
             } else if(operator.equalsIgnoreCase("-")) {
                 result = new SubtractionTreeNode(result1, result2);
+                result1 = result;
             }
+
             currentToken++;
         }
 		return result;
