@@ -48,19 +48,21 @@ public class Parser {
 	 * @return the (root node of) the resulting subtree
 	 */
 	private TreeNode factor() {
-		// TODO fill me in
         String operand = tokens[currentToken];
 
+        // F := number
         if (isNumber(operand)) {
             return new LeafTreeNode(Double.parseDouble(operand));
+        // F := -F
         } else if (operand.equalsIgnoreCase("-")) {
             currentToken++;
             result = factor();
             return new UnaryMinusTreeNode(result);
+        // F := (E)
         } else {
             currentToken++;
             result = expression();
-            currentToken++;
+            currentToken--;
             return result;
         }
 	}
@@ -71,7 +73,6 @@ public class Parser {
 	 * @return the (root node of) the resulting subtree
 	 */
 	private TreeNode term() {
-		// TODO fill me in
         TreeNode result1;
         String operator = "";
         result = factor();
@@ -94,6 +95,7 @@ public class Parser {
 
             currentToken++;
 
+            // factor() does not increment the currentToken like term does so have to handle this case separately
             if (currentToken < tokens.length && tokens[currentToken] != null && tokens[currentToken].equalsIgnoreCase(")")) {
                 currentToken++;
             }
@@ -108,7 +110,6 @@ public class Parser {
 	 * @return the (root node of) the resulting subtree
 	 */
 	private TreeNode expression() {
-		// TODO fill me in
         String operator = "";
         result = term();
         TreeNode result1 = result;
@@ -126,12 +127,19 @@ public class Parser {
                 result1 = result;
             }
 
-            currentToken++;
+            if (currentToken < tokens.length && tokens[currentToken] != null && tokens[currentToken].equalsIgnoreCase(")")) {
+                currentToken++;
+            }
         }
 		return result;
 
 	}
 
+    /**
+     * Checks if argument is a number(double)
+     * @param operand
+     * @return true if argument is a number, false otherwise
+     */
     boolean isNumber(String operand) {
         try {
             Double.parseDouble(operand);

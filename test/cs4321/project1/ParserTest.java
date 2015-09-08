@@ -104,4 +104,32 @@ public class ParserTest {
         parseResult1.accept(v1);
         assertEquals("((5.0+2.0)-6.5)", v1.getResult());
     }
+
+    @Test
+    public void testAdditionSimple2() {
+        Parser p1 = new Parser("5 + 2 + 7");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("((5.0+2.0)+7.0)", v1.getResult());
+    }
+
+    @Test
+    public void testComplexExpression() {
+        Parser p1 = new Parser("( ( ( 8 + 4 ) * 7 ) / 12 )");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("(((8.0+4.0)*7.0)/12.0)", v1.getResult());
+    }
+
+    @Test
+    public void testComplexExpression2() {
+        Parser p1 = new Parser("4 + ( 1 / 12 )");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("(4.0+(1.0/12.0))", v1.getResult());
+    }
+
 }
