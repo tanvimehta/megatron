@@ -79,7 +79,6 @@ public class EvaluateTreeVisitor implements TreeVisitor {
 	public void visit(SubtractionTreeNode node) {
         node.getLeftChild().accept(this);
         node.getRightChild().accept(this);
-
         operand1 = operands.pop();
         operand2 = operands.pop();
         operands.push(operand2 - operand1);

@@ -97,7 +97,35 @@ public class FullSystemTest {
 		assertEquals(11.0, treeEvaluationResult, DELTA);
 		assertEquals(11.0, prefixEvaluationResult, DELTA);
 		assertEquals(11.0, postfixEvaluationResult, DELTA);
+	}
+	
+	@Test
+	public void testNestedGrammarExpression(){
+		Parser p1 = new Parser("- 2.0 * ( - 9.0 / 3.0 ) + ( ( ( 8.0 + 4.0 ) * 7.0 ) / 14.0 ) - ( 6 - ( - 4 ) )");
+		TreeNode parseResult1 = p1.parse();
 
+		EvaluateTreeVisitor v1 = new EvaluateTreeVisitor();
+		parseResult1.accept(v1);
+		double treeEvaluationResult = v1.getResult();
+		
+		BuildPrefixExpressionTreeVisitor v2 = new BuildPrefixExpressionTreeVisitor();
+		parseResult1.accept(v2);
+		ListNode prefixRepresentation = v2.getResult();
+		EvaluatePrefixListVisitor v3 = new EvaluatePrefixListVisitor();
+		prefixRepresentation.accept(v3);
+		double prefixEvaluationResult = v3.getResult();
+		
+		BuildPostfixExpressionTreeVisitor v4 = new BuildPostfixExpressionTreeVisitor();
+		parseResult1.accept(v4);
+		ListNode postfixRepresentation = v4.getResult();
+		EvaluatePostfixListVisitor v5 = new EvaluatePostfixListVisitor();
+		postfixRepresentation.accept(v5);
+		double postfixEvaluationResult = v5.getResult();
+		
+		assertEquals(2.0, treeEvaluationResult, DELTA);
+		assertEquals(2.0, prefixEvaluationResult, DELTA);
+		assertEquals(2.0, postfixEvaluationResult, DELTA);
+		
 	}
 	
 }
