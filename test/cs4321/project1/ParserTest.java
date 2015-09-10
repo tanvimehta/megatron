@@ -141,4 +141,12 @@ public class ParserTest {
         assertEquals("((-2.0)*(((-9.0)/3.0)+((((8.0+4.0)*7.0)/12.0)-(6.0-(-4.0)))))", v1.getResult());
     }
 
+    @Test
+    public void testLeftToRightAssociation() {
+        Parser p1 = new Parser("- 2 * ( - 9 / 3 ) + 6");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("((-2.0)*(((-9.0)/3.0))+6.0))", v1.getResult());
+    }
 }

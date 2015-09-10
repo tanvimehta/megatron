@@ -52,19 +52,21 @@ public class Parser {
 
         // F := number
         if (isNumber(operand)) {
-            return new LeafTreeNode(Double.parseDouble(operand));
+            result = new LeafTreeNode(Double.parseDouble(operand));
         // F := -F
         } else if (operand.equalsIgnoreCase("-")) {
             currentToken++;
             result = factor();
-            return new UnaryMinusTreeNode(result);
+            result = new UnaryMinusTreeNode(result);
         // F := (E)
         } else {
             currentToken++;
             result = expression();
-            currentToken--;
-            return result;
+            currentToken++;
         }
+
+        currentToken++;
+        return result;
 	}
 
 	/**
@@ -77,7 +79,6 @@ public class Parser {
         String operator = "";
         result = factor();
         result1 = result;
-        currentToken++;
 
         while (currentToken < tokens.length && tokens[currentToken] != null &&
                 (tokens[currentToken].equalsIgnoreCase("*") || tokens[currentToken].equalsIgnoreCase("/"))) {
@@ -93,12 +94,12 @@ public class Parser {
                 result1 = result;
             }
 
-            currentToken++;
+            //currentToken++;
 
             // factor() does not increment the currentToken like term does so have to handle this case separately
-            if (currentToken < tokens.length && tokens[currentToken] != null && tokens[currentToken].equalsIgnoreCase(")")) {
-                currentToken++;
-            }
+//            if (currentToken < tokens.length && tokens[currentToken] != null && tokens[currentToken].equalsIgnoreCase(")")) {
+//                currentToken++;
+//            }
         }
 		return result;
 
@@ -127,9 +128,9 @@ public class Parser {
                 result1 = result;
             }
 
-            if (currentToken < tokens.length && tokens[currentToken] != null && tokens[currentToken].equalsIgnoreCase(")")) {
-                currentToken++;
-            }
+//            if (currentToken < tokens.length && tokens[currentToken] != null && tokens[currentToken].equalsIgnoreCase(")")) {
+//                currentToken++;
+//            }
         }
 		return result;
 
