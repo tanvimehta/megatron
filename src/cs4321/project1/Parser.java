@@ -57,12 +57,11 @@ public class Parser {
         } else if (operand.equalsIgnoreCase("-")) {
             currentToken++;
             result = factor();
-            result = new UnaryMinusTreeNode(result);
+            return new UnaryMinusTreeNode(result);
         // F := (E)
         } else {
             currentToken++;
             result = expression();
-            currentToken++;
         }
 
         currentToken++;
