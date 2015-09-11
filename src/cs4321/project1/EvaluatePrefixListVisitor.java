@@ -70,11 +70,18 @@ public class EvaluatePrefixListVisitor implements ListVisitor {
                 if (!operators.empty()) 
                 {
                     Pair<Character, Integer> newHead = operators.pop();
+                    
+                    //Repeat this process until the time we fulfill the conditions
+                    //of an operator i.e. its count becomes zero or we run out of 
+                    //elements
                     while (newHead != null && newHead.getValue() - 1 == 0)
                     {
                     	evaluateExpression(newHead.getKey());
+                    	
+                    	//New value of new head if there is something on the stack
                     	if (!operators.empty())
                     		newHead = operators.pop();
+                    	//If stack is empty, it is time to exit :)
                     	else
                     		newHead = null;
                     }
@@ -92,13 +99,6 @@ public class EvaluatePrefixListVisitor implements ListVisitor {
             if (node.getNext() != null)
                 node.getNext().accept(this);
             
-            //This case gets activated only when we have the last operator left on the stack.
-            //It would have remained unevaluated otherwise, since it does not have a next
-            else {
-                if (!operators.empty()) {
-                    evaluateExpression(operators.pop().getKey());
-                }
-            }
         }
 	}
 	
