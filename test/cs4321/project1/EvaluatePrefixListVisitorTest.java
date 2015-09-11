@@ -89,7 +89,7 @@ public class EvaluatePrefixListVisitorTest {
 		
 		EvaluatePrefixListVisitor v1 = new EvaluatePrefixListVisitor();
 		n15.accept(v1);
-		assertEquals(4.0, v1.getResult(), DELTA);
+		assertEquals(5.0, v1.getResult(), DELTA);
 	}
 	
 	@Test

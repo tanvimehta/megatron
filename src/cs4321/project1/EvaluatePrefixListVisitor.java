@@ -46,31 +46,48 @@ public class EvaluatePrefixListVisitor implements ListVisitor {
 	@Override
 	public void visit(NumberListNode node) {
 		
+		//Push the operand on to the stack
         operands.push(node.getData());
 
-        if (!operators.empty()) {
+        if (!operators.empty()) 
+        {
+        	//Pop the current operator i.e. head from the stack and decrement its
+        	//count by 1 since we have added an operand on the stack
             Pair<Character, Integer> currentOperator = operators.pop();
             Integer count = currentOperator.getValue() - 1;
             
-            //The operation happens only when the expected operand count goes down to zero
-            if (count == 0) {
-            	
-                //Evaluate the value of the current expression depending on what the operator is
+            //When the expected operand count goes down to zero for an operator
+            //Perform the required operation
+            if (count == 0) 
+            {	
+                //Evaluate the value of the current expression depending on what
+            	//the operator is and push the new value on to the stack
                 evaluateExpression(currentOperator.getKey());
                 
-                //If there is an operator below the current one on the stack, reduce its count by 1
-                //since we are pushing the result of the current operation on to the stack
-                if (!operators.empty()) {
+                //If there is an operator below the current one on the stack, 
+                //reduce its count by 1 since we are pushing the result of the 
+                //current operation on to the stack
+                if (!operators.empty()) 
+                {
                     Pair<Character, Integer> newHead = operators.pop();
-                    operators.push(new Pair<Character, Integer>(newHead.getKey(), newHead.getValue() - 1));
+                    while (newHead != null && newHead.getValue() - 1 == 0)
+                    {
+                    	evaluateExpression(newHead.getKey());
+                    	if (!operators.empty())
+                    		newHead = operators.pop();
+                    	else
+                    		newHead = null;
+                    }
+                    if (newHead != null)
+                    	operators.push(new Pair<Character, Integer>(newHead.getKey(), newHead.getValue() - 1));
                 }
-            } 
+            }
             
-            //Since required operand count is not yet zero, we just pushed the operator and reduced count
-            //back onto the stack
+            //Since required operand count is not yet zero, we just pushed 
+            //the operator with a reduced count back onto the stack
             else
                 operators.push(new Pair<Character, Integer>(currentOperator.getKey(), count));
-            
+       
             //Recursively call the next node if it exists
             if (node.getNext() != null)
                 node.getNext().accept(this);
