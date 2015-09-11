@@ -159,5 +159,22 @@ public class ParserTest {
         parseResult1.accept(v1);
         assertEquals("(((-2.0)*((-9.0)/3.0))+6.0)", v1.getResult());
     }
-
+    
+    @Test
+    public void simpleParserTestFromPiazza(){    	
+    	Parser p1 = new Parser("( 1.0 + 65.0 )");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("(1.0+65.0)", v1.getResult());
+    }
+    
+    @Test
+    public void simpleAssociationTest(){    	
+    	Parser p1 = new Parser("8 / 4 / 2 + 5 + 3");
+        TreeNode parseResult1 =  p1.parse();
+        PrintTreeVisitor v1 = new PrintTreeVisitor();
+        parseResult1.accept(v1);
+        assertEquals("((((8.0/4.0)/2.0)+5.0)+3.0)", v1.getResult());
+    }
 }
