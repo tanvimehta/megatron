@@ -5,8 +5,6 @@ import cs4321.project1.list.*;
 
 import org.junit.Test;
 
-import com.sun.xml.internal.ws.assembler.jaxws.AddressingTubeFactory;
-
 public class PrintListVisitorTest {
 
 	@Test
