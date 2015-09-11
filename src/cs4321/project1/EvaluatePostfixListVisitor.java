@@ -12,7 +12,7 @@ import java.util.Stack;
 /**
  * Evaluates the value of a list which is in the postfix form
  * 
- * @author Your names and netids go here
+ * @author Gaurav, Tanvi and Sahana (gk368,tmm259 and sv387)
  */
 public class EvaluatePostfixListVisitor implements ListVisitor {
 

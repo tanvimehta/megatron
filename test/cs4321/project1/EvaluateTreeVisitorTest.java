@@ -49,5 +49,18 @@ public class EvaluateTreeVisitorTest {
 		n4.accept(v2);
 		assertEquals(2.0, v2.getResult(), DELTA);
 	}
+	
+	@Test
+	public void testUnaryMinusBinaryTree() {
+		TreeNode n1 = new LeafTreeNode(4.0);
+		TreeNode n2 = new LeafTreeNode(5.0);
+		TreeNode n3 = new UnaryMinusTreeNode(n1);
+		TreeNode n4 = new UnaryMinusTreeNode(n2);
+		TreeNode n5 = new MultiplicationTreeNode(n3,n4);		
+        EvaluateTreeVisitor v1 = new EvaluateTreeVisitor();
+		n5.accept(v1);
+		assertEquals(20.0, v1.getResult(), DELTA);
+        EvaluateTreeVisitor v2 = new EvaluateTreeVisitor();		
+	}
 
 }

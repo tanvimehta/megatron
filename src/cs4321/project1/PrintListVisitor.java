@@ -5,7 +5,7 @@ import cs4321.project1.list.*;
 /**
  * Visitor to pretty-print the expression in either prefix or postfix form
  * 
- * @author Your names and netids go here
+ * @author Gaurav, Tanvi and Sahana (gk368,tmm259 and sv387)
  */
 
 public class PrintListVisitor implements ListVisitor {

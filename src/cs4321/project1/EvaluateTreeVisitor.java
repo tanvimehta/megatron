@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * Traverse expression tree and evaluate it to a single number
  * 
- * @author Your names and netids go here
+ * @author Gaurav, Tanvi and Sahana (gk368,tmm259 and sv387)
  */
 
 public class EvaluateTreeVisitor implements TreeVisitor {

@@ -7,7 +7,7 @@ import cs4321.project1.tree.*;
  * This class constructs Prefix list representation of the intermediate infix tree
  * by appending the current node to the list and 
  * traversing  recursively the left child node and the right child node
- * @author Your names and netids go here
+ * @author Gaurav, Tanvi and Sahana (gk368,tmm259 and sv387)
  */
 public class BuildPrefixExpressionTreeVisitor implements TreeVisitor {
 

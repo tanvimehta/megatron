@@ -6,7 +6,7 @@ import cs4321.project1.tree.*;
 /**
  * This class constructs Postfix list representation of the intermediate infix tree node
  * by traversing recursively the left child node, right child node and appending the current node
- * @author Your names and netids go here
+ * @author Gaurav, Tanvi and Sahana (gk368,tmm259 and sv387)
  */
 public class BuildPostfixExpressionTreeVisitor implements TreeVisitor {
 
