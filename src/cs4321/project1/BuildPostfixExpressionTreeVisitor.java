@@ -63,7 +63,8 @@ public class BuildPostfixExpressionTreeVisitor implements TreeVisitor {
 	public void visit(UnaryMinusTreeNode node) {
 		// TODO fill me in
 		node.getChild().accept(this);
-		tempResult.setNext(new UnaryMinusListNode());        
+		tempResult.setNext(new UnaryMinusListNode());  
+		tempResult = tempResult.getNext();
 	}
 
 	/*
